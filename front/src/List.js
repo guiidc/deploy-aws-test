@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import axiosIntance from './utils/axiosInstance';
+import { useNavigate } from 'react-router-dom';
 
 function List() {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
+    const onChangeRoute = () => {
+      navigate('/outro')
+    }
   
     const onFetchEvents = async () => {
       setLoading(true);
@@ -27,7 +33,7 @@ function List() {
            <li key={id}>{event}</li>
          ))}
        </ul>
-       <button className='button'>Outra página</button>
+       <button className='button' onClick={onChangeRoute}>Outra página</button>
       </div>
     );
   }
