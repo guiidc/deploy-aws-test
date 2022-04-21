@@ -1,0 +1,24 @@
+subtituir TODO o conteudo do arquivo que está em /etc/nginx/sites-avaliable/default
+
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        root /var/www/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+
+        location / {
+                root /var/www/build; # jogar a pasta build nesse diretorio 
+                try_files $uri $uri/ =404;
+        }
+
+        location /api/ {
+                proxy_pass http://localhost:4000; # porta em que o backend está rodando
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+        }
+}
