@@ -10,7 +10,7 @@ server {
 
         location / {
                 root /var/www/build; # jogar a pasta build nesse diretorio 
-                try_files $uri $uri/ =404;
+                try_files $uri /index.html;
         }
 
         # lembrar de colocar o IP da AWS no env do REACT para pegar dados da api
